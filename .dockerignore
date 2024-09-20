@@ -1,0 +1,29 @@
+# Ignore Python cache files
+**/__pycache__
+**/*.pyc
+**/*.pyo
+**/*.pyd
+
+# Ignore environment and virtual environment directories
+env/
+venv/
+*.env
+*.venv
+
+# Ignore Docker-related files that are not needed in the image
+Dockerfile
+.dockerignore
+
+# Ignore version control and other unnecessary files
+.git
+.gitignore
+.idea
+.vscode
+
+# Ignore static and media files if not required
+static/
+media/
+
+# Ignore local files
+*.sqlite3
+*.log
