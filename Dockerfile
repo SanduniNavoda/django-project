@@ -18,11 +18,14 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 COPY . /app/
 
 # Run database migrations
-RUN python manage.py makemigrations
-RUN python manage.py migrate
+# RUN python manage.py makemigrations 
+# RUN python manage.py migrate
 
 # Expose port 8000 to be accessible from outside the container
 EXPOSE 8000
 
 # Command to run the application
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["sh", "-c", "python manage.py makemigrations --noinput && python manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000"]
+
+

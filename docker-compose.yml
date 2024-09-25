@@ -1,10 +1,40 @@
 version: '3.8'
 
 services:
-  web:
-    build: .
+
+  django:
+    build:
+      context: .
+    container_name: django-app
     ports:
-      - "8000:8000"
+    - "8000:8000"
     volumes:
-      - ./core/data:/app/core/data  # Ensure this matches the path where your CSV files are located
+      - .:/app
+      - ./core/data:/app/core/data 
+    depends_on:
+      - db
+    environment:
+      - DB_NAME=school
+      - DB_USER=root
+      - DB_PASSWORD=mysql
+      - DB_HOST=db
     command: python manage.py runserver 0.0.0.0:8000
+
+  
+
+  db:
+    image: mysql:latest
+    container_name: mysql-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql
+      - MYSQL_DATABASE=school
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db_scripts:/docker-entrypoint-initdb.d
+      - ./csv:/var/lib/mysql-files 
+
+
+volumes:
+  mysql_data:

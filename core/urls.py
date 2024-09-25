@@ -4,3 +4,4 @@ from .views import visualize_data
 urlpatterns = [
     path('visualize/', visualize_data, name='visualize_data'),
 ]
+
